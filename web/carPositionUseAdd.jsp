@@ -71,6 +71,18 @@
 
 
         String id = request.getParameter("id");
+
+
+        String pricesql = "select t.* from car_positon_price t,cheweixinxi t1 where t.guige=t1.guige and t.weizhi=t1.weizhi and t1.ID="+id;
+
+        ResultSet pricesqlrs = connDbBean.executeQuery(pricesql);
+
+        String price = "";
+        while (pricesqlrs.next()){
+            price = pricesqlrs.getString("price");
+        }
+
+
         String carusername = request.getParameter("carusername");
         String carnumber = request.getParameter("carnumber");
 
@@ -95,46 +107,53 @@
             connDbBean.executeUpdate(sql2);
 
 
-             DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
 
              long times = 0;
 
-                    Date one;
-                    Date two;
-                    long day = 0;
-                    long hour = 0;
-                    long min = 0;
-                    long sec = 0;
-                    try {
-                        one = df.parse(starttime);
-                        two = new Date();
-                        long time1 = one.getTime();
-                        long time2 = two.getTime();
-                        long diff ;
-                        if(time1<time2) {
-                            diff = time2 - time1;
-                        } else {
-                            diff = time1 - time2;
-                        }
-                        day = diff / (24 * 60 * 60 * 1000);
-                        hour = (diff / (60 * 60 * 1000) - day * 24);
-                        min = ((diff / (60 * 1000)) - day * 24 * 60 - hour * 60);
-                         sec = (diff/1000-day*24*60*60-hour*60*60-min*60);
-                         if(sec > 0){
-                         min = min +1;
-                         }
-                        times = day *24 + hour;
-                        if(min > 0){
-                         times = times+1;
-                        }
-
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
 
 
+               // 按照传入的格式生成一个simpledateformate对象
+               SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+               long nd = 1000 * 24 * 60 * 60;// 一天的毫秒数
+               long nh = 1000 * 60 * 60;// 一小时的毫秒数
+               long nm =  1000*  60;// 一分钟的毫秒数
+               long ns = 1000;// 一秒钟的毫秒数
+               long diff;
+               long day = 0;
+               long hour = 0;
+               long min = 0;
+               long sec = 0;
+               // 获得两个时间的毫秒时间差异
+               try {
+                   diff = new java.util.Date().getTime() - sd.parse(starttime).getTime();
+                   day = diff / nd;// 计算差多少天
+                   hour = diff % nd / nh + day * 24;// 计算差多少小时
+                   min = diff % nd % nh / nm + day * 24 * 60;// 计算差多少分钟
+                   sec = diff % nd % nh % nm / ns;// 计算差多少秒
+                   // 输出结果
+                   System.out.println("时间相差：" + day + "天" + (hour - day * 24) + "小时"
+                           + (min - day * 24 * 60) + "分钟" + sec + "秒。");
+                   System.out.println("hour=" + hour + ",min=" + min);
 
-              String sql21 = "update car_use_info t set t.endtime='"+dateNow+"' ,t.times="+times+" where t.positionid="+id;
+                   times = hour + (day*24);
+                   if(sec > 0){
+                       min = min +1;
+                   }
+                   if(min > 0){
+                       times = times +1;
+                   }
+
+
+               } catch (ParseException e) {
+                   // TODO Auto-generated catch block
+                   e.printStackTrace();
+               }
+
+
+
+
+              String sql21 = "update car_use_info t set t.endtime='"+dateNow+"' ,t.times="+times+",t.price="+ (Long.parseLong(price) * times)+" where t.positionid="+id;
               connDbBean.executeUpdate(sql21);
 
 
@@ -144,6 +163,7 @@
             String sql4 = "delete from car_use_info  where positionid="+id;
             connDbBean.executeUpdate(sql3);
             connDbBean.executeUpdate(sql4);
+             out.print("<script>alert('提交成功!!应付金额 "+(Long.parseLong(price) * times)+" 元');location.href='carPositionInfo.jsp';</script>");
 
         }else{
              //新增车位使用
@@ -155,9 +175,9 @@
             String sql2 = "update cheweixinxi t set t.zhuangtai='占用' where id="+id;
 
             connDbBean.executeUpdate(sql2);
+             out.print("<script>alert('提交成功!!');location.href='carPositionInfo.jsp';</script>");
 
         }
-      out.print("<script>alert('提交成功!!');location.href='carPositionInfo.jsp';</script>");
 
 
 

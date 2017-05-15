@@ -69,7 +69,7 @@ function gow()
   ResultSet rs;
   String id = request.getParameter("id");
 
-        System.out.println(id);
+
    String sql = "select * from car_positon_price t where t.weizhi ="+id + " order by t.guige";
 
    rs =connDbBean.executeQuery(sql);

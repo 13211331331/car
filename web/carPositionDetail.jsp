@@ -7,11 +7,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 %>
 <%@ page language="java" import="java.sql.*" %>
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.text.ParseException" %>
+<%@ page import="java.text.DateFormat" %>
+<%@ page import="java.util.*" %>
 <jsp:useBean id="connDbBean" scope="page" class="db.db"/>
 <html>
   <head>
@@ -76,6 +75,18 @@ function gow()
 
         String id = request.getParameter("id");
 
+
+        String pricesql = "select t.* from car_positon_price t,cheweixinxi t1 where t.guige=t1.guige and t.weizhi=t1.weizhi and t1.ID="+id;
+
+        ResultSet pricesqlrs = connDbBean.executeQuery(pricesql);
+
+        String price = "";
+        while (pricesqlrs.next()){
+            price = pricesqlrs.getString("price");
+        }
+
+        pricesqlrs.close();
+
         String sql = "select * from car_use_info t where t.positionid="+id;
 
         String sql1 = "select * from car_use_info_his t where t.positionid="+id;
@@ -100,8 +111,10 @@ function gow()
         while (rs.next()){
             carusername = rs.getString("carusername");
             carnumber = rs.getString("carnumber");
+            starttime = rs.getString("starttime");
             isEnd = true;
         }
+        rs.close();
 
         starttime = dateNow;
         String bntStr = "提交开始使用该车位";
@@ -134,7 +147,54 @@ function gow()
 
        <%
            if (isEnd){
+
+
+
+               long times = 0l;
+
+
+               // 按照传入的格式生成一个simpledateformate对象
+               SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+               long nd = 1000 * 24 * 60 * 60;// 一天的毫秒数
+               long nh = 1000 * 60 * 60;// 一小时的毫秒数
+               long nm =  1000*  60;// 一分钟的毫秒数
+               long ns = 1000;// 一秒钟的毫秒数
+               long diff;
+               long day = 0;
+               long hour = 0;
+               long min = 0;
+               long sec = 0;
+               // 获得两个时间的毫秒时间差异
+               try {
+                   diff = new java.util.Date().getTime() - sd.parse(starttime).getTime();
+                   day = diff / nd;// 计算差多少天
+                   hour = diff % nd / nh + day * 24;// 计算差多少小时
+                   min = diff % nd % nh / nm + day * 24 * 60;// 计算差多少分钟
+                   sec = diff % nd % nh % nm / ns;// 计算差多少秒
+                   // 输出结果
+                   System.out.println("时间相差：" + day + "天" + (hour - day * 24) + "小时"
+                           + (min - day * 24 * 60) + "分钟" + sec + "秒。");
+                   System.out.println("hour=" + hour + ",min=" + min);
+
+                   times = hour + (day*24);
+                   if(sec > 0){
+                       min = min +1;
+                   }
+                   if(min > 0){
+                       times = times +1;
+                   }
+
+
+               } catch (ParseException e) {
+                   // TODO Auto-generated catch block
+                   e.printStackTrace();
+               }
+
+               //System.out.println(times);
+               //System.out.println(price);
+
                out.print("<tr><td>驶入时间:</td><td><input type=\"text\" name=\"start\" VALUE=\""+starttime+"\" /></td></tr>");
+            //   out.print("<tr><td>应付金额:</td><td> "+(times*Long.parseLong(price))+" </td></tr>");
            }
        %>
 
@@ -168,8 +228,9 @@ function gow()
             while (rs1.next()){
                out.print("<tr><td>"+rs1.getString("carusername")+"</td><td>"+rs1.getString("carnumber")+"</td>" +
                        "<td>"+rs1.getString("starttime")+"</td><td>"+rs1.getString("endtime")+
-                       "</td><td>44</td><td>45</td></tr>");
+                       "</td><td>"+rs1.getString("times")+"</td><td>"+rs1.getString("price")+"</td></tr>");
             }
+            rs1.close();
 
         %>
 
