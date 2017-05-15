@@ -94,7 +94,7 @@ function gow()
 
            out.print("<input type='hidden' name='weizhi' value='"+id+"'>");
            while(rs.next()){
-               out.print(" <tr><td>"+ rs.getString("guige_desc")+"</td>"+"<td><input name='price"+rs.getString("guige")+"' type='text' value='"+rs.getString("price")+"' size='50' /></td>"+"</tr>");
+               out.print(" <tr><td>"+ rs.getString("guige_desc")+"</td>"+"<td><input name='price-"+rs.getString("guige")+"' type='text' value='"+rs.getString("price")+"' size='50' /></td>"+"</tr>");
            }
 
        %>
