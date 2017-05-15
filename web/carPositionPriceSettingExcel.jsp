@@ -97,7 +97,7 @@ function gow()
 
    %>
   <form name="form1" id="form1" method="post" action="cheweixinxi_add_post.jsp">
-  车位价格设置（单位：元/月）:
+  车位价格设置（单位：元/小时）:
   <br><br>
 
       <input type="button" name="Submit2" value="导出EXCEL" style='border:solid 1px #000000; color:#666666' onClick="javascript:location.href='carPositionPriceSettingExcel.jsp';" />
