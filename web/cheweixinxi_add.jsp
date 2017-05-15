@@ -80,6 +80,15 @@ function gow()
         2.车位添加可以输入以下信息：车位区域（下拉框选择）、车位规格（下拉框选择）、操作者（手动输入）、位置描述（手动输入）、
         点击提交后生成临时车位信息。*/
 
+        String sql2 = "select  DISTINCT t.guige,t.guige_desc from car_positon_price t ORDER BY t.guige";
+
+        String sql1= "select DISTINCT t.weizhi,t.weizhi_desc from car_positon_price t ORDER BY t.weizhi";
+
+
+        ResultSet rs1 = connDbBean.executeQuery(sql1);
+        ResultSet rs2 = connDbBean.executeQuery(sql2);
+
+
 
    %>
   <form name="form1" id="form1" method="post" action="cheweixinxi_add_post.jsp">
@@ -90,12 +99,18 @@ function gow()
 <tr><td>位置：</td><td>
    <%-- <input name='weizhi' type='text' id='weizhi' value='' size='50' style='border:solid 1px #000000; color:#666666' />--%>
        <select name='weizhi' id='weizhi'>
-           <option value="1">南区地下停车场</option>
+           <%
+           while (rs1.next()){
+               out.print("<option value=\""+rs1.getString("weizhi")+"\">"+rs1.getString("weizhi_desc")+"</option>");
+           }
+               rs1.close();
+           %>
+           <%--<option value="1">南区地下停车场</option>
            <option value="2">南区露天停车场</option>
            <option value="3">地下室</option>
            <option value="4">后巷</option>
            <option value="5">草坪</option>
-           <option value="6">路边停车位</option>
+           <option value="6">路边停车位</option>--%>
        </select> &nbsp;*
 </td></tr>
 
@@ -103,10 +118,20 @@ function gow()
        <tr><td>规格：</td><td>
            <%-- <input name='weizhi' type='text' id='weizhi' value='' size='50' style='border:solid 1px #000000; color:#666666' />--%>
            <select name='guige' id='guige'>
-               <option value="1">1.0米~2.0米</option>
+
+               <%
+                   while (rs2.next()){
+                       out.print("<option value=\""+rs2.getString("guige")+"\">"+rs2.getString("guige_desc")+"</option>");
+                   }
+                   rs2.close();
+               %>
+
+              <%-- <option value="1">1.0米~2.0米</option>
                <option value="2">1.5米~2.5米</option>
                <option value="3">2.0米~3.0米</option>
-               <option value="4">3米以上</option>
+               <option value="4">3米以上</option>--%>
+
+
            </select> &nbsp;*
        </td></tr>
 
