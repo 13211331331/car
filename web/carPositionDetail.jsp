@@ -11,6 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <jsp:useBean id="connDbBean" scope="page" class="db.db"/>
 <html>
   <head>
@@ -81,7 +82,11 @@ function gow()
 
 
 
-        System.out.println(sql);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateNow = sdf.format(new java.util.Date());
+
+
         ResultSet rs = connDbBean.executeQuery(sql);
         ResultSet rs1 = connDbBean.executeQuery(sql1);
         //ResultSet rs2 = connDbBean.executeQuery(sql2);
@@ -95,12 +100,10 @@ function gow()
         while (rs.next()){
             carusername = rs.getString("carusername");
             carnumber = rs.getString("carnumber");
-            starttime = rs.getString("starttime");
-            endtime = rs.getString("endtime");
             isEnd = true;
         }
 
-        starttime = new java.util.Date().toLocaleString();
+        starttime = dateNow;
         String bntStr = "提交开始使用该车位";
         if (isEnd){
             bntStr = "提交结束使用该车位";
@@ -148,22 +151,27 @@ function gow()
 
     车位使用记录
     <br><br>
-    <input type="button" name="button" value="情况使用记录"  style='border:solid 1px #000000; color:#666666' />
+    <input type="button" name="button" value="清空使用记录"  style='border:solid 1px #000000; color:#666666' />
 
     <table width="100%" border="1" align="center" cellpadding="3" cellspacing="1" bordercolor="#00FFFF" style="border-collapse:collapse">
 
         <tr>
-            <td width="30" align="center" bgcolor="CCFFFF">序号</td>
             <td bgcolor='#CCFFFF'>车主姓名</td>
             <td bgcolor='#CCFFFF'>车牌号码</td>
             <td bgcolor='#CCFFFF'>驶入时间</td>
             <td bgcolor='#CCFFFF'>驶出时间</td>
             <td bgcolor='#CCFFFF'>总时长</td>
             <td bgcolor='#CCFFFF'>总价格</td>
-            <td width="138" align="center" bgcolor="CCFFFF">添加时间</td>
-            <td bgcolor='#CCFFFF'>操作</td>
-
         </tr>
+
+        <%
+            while (rs1.next()){
+               out.print("<tr><td>"+rs1.getString("carusername")+"</td><td>"+rs1.getString("carnumber")+"</td>" +
+                       "<td>"+rs1.getString("starttime")+"</td><td>"+rs1.getString("endtime")+
+                       "</td><td>44</td><td>45</td></tr>");
+            }
+
+        %>
 
     </table>
 
