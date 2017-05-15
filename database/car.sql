@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 222
-Source Server Version : 50622
-Source Host           : localhost:3306
+Source Server         : 127.0.0.1
+Source Server Version : 50714
+Source Host           : 127.0.0.1:3306
 Source Database       : car
 
 Target Server Type    : MYSQL
-Target Server Version : 50622
+Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2017-05-14 22:14:32
+Date: 2017-05-15 20:16:15
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -85,29 +85,78 @@ CREATE TABLE `car_positon_price` (
 -- Records of car_positon_price
 -- ----------------------------
 INSERT INTO `car_positon_price` VALUES ('1', '1', '1', '500', '1.0米~2.0米', '南区地下停车场');
-INSERT INTO `car_positon_price` VALUES ('2', '1', '2', '500', '1.0米~2.0米', '南区露天停车场');
-INSERT INTO `car_positon_price` VALUES ('3', '1', '3', '500', '1.0米~2.0米', '地下室');
+INSERT INTO `car_positon_price` VALUES ('2', '1', '2', '2', '1.0米~2.0米', '南区露天停车场');
+INSERT INTO `car_positon_price` VALUES ('3', '1', '3', '5', '1.0米~2.0米', '地下室');
 INSERT INTO `car_positon_price` VALUES ('4', '1', '4', '500', '1.0米~2.0米', '后巷');
 INSERT INTO `car_positon_price` VALUES ('5', '1', '5', '500', '1.0米~2.0米', '草坪');
-INSERT INTO `car_positon_price` VALUES ('6', '1', '6', '500', '1.0米~2.0米', '路边停车位');
+INSERT INTO `car_positon_price` VALUES ('6', '1', '6', '1', '1.0米~2.0米', '路边停车位');
 INSERT INTO `car_positon_price` VALUES ('7', '2', '1', '500', '1.5米~2.5米', '南区地下停车场');
-INSERT INTO `car_positon_price` VALUES ('8', '2', '2', '500', '1.5米~2.5米', '南区露天停车场');
-INSERT INTO `car_positon_price` VALUES ('9', '2', '3', '500', '1.5米~2.5米', '地下室');
+INSERT INTO `car_positon_price` VALUES ('8', '2', '2', '4', '1.5米~2.5米', '南区露天停车场');
+INSERT INTO `car_positon_price` VALUES ('9', '2', '3', '7', '1.5米~2.5米', '地下室');
 INSERT INTO `car_positon_price` VALUES ('10', '2', '4', '500', '1.5米~2.5米', '后巷');
 INSERT INTO `car_positon_price` VALUES ('11', '2', '5', '500', '1.5米~2.5米', '草坪');
-INSERT INTO `car_positon_price` VALUES ('12', '2', '6', '500', '1.5米~2.5米', '路边停车位');
+INSERT INTO `car_positon_price` VALUES ('12', '2', '6', '2', '1.5米~2.5米', '路边停车位');
 INSERT INTO `car_positon_price` VALUES ('13', '3', '1', '500', '2.0米~3.0米', '南区地下停车场');
-INSERT INTO `car_positon_price` VALUES ('14', '3', '2', '500', '2.0米~3.0米', '南区露天停车场');
-INSERT INTO `car_positon_price` VALUES ('15', '3', '3', '500', '2.0米~3.0米', '地下室');
+INSERT INTO `car_positon_price` VALUES ('14', '3', '2', '5005', '2.0米~3.0米', '南区露天停车场');
+INSERT INTO `car_positon_price` VALUES ('15', '3', '3', '8', '2.0米~3.0米', '地下室');
 INSERT INTO `car_positon_price` VALUES ('16', '3', '4', '500', '2.0米~3.0米', '后巷');
 INSERT INTO `car_positon_price` VALUES ('17', '3', '5', '500', '2.0米~3.0米', '草坪');
-INSERT INTO `car_positon_price` VALUES ('18', '3', '6', '500', '2.0米~3.0米', '路边停车位');
+INSERT INTO `car_positon_price` VALUES ('18', '3', '6', '3', '2.0米~3.0米', '路边停车位');
 INSERT INTO `car_positon_price` VALUES ('19', '4', '1', '500', '3米以上', '南区地下停车场');
-INSERT INTO `car_positon_price` VALUES ('20', '4', '2', '500', '3米以上', '南区露天停车场');
-INSERT INTO `car_positon_price` VALUES ('21', '4', '3', '500', '3米以上', '地下室');
+INSERT INTO `car_positon_price` VALUES ('20', '4', '2', '6', '3米以上', '南区露天停车场');
+INSERT INTO `car_positon_price` VALUES ('21', '4', '3', '5', '3米以上', '地下室');
 INSERT INTO `car_positon_price` VALUES ('22', '4', '4', '500', '3米以上', '后巷');
 INSERT INTO `car_positon_price` VALUES ('23', '4', '5', '500', '3米以上', '草坪');
-INSERT INTO `car_positon_price` VALUES ('24', '4', '6', '500', '3米以上', '路边停车位');
+INSERT INTO `car_positon_price` VALUES ('24', '4', '6', '5', '3米以上', '路边停车位');
+
+-- ----------------------------
+-- Table structure for `car_use_info`
+-- ----------------------------
+DROP TABLE IF EXISTS `car_use_info`;
+CREATE TABLE `car_use_info` (
+  `id` int(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `starttime` varchar(50) DEFAULT NULL COMMENT '驶入时间',
+  `endtime` varchar(50) DEFAULT NULL COMMENT '使出时间',
+  `carusername` varchar(50) DEFAULT NULL COMMENT '车主',
+  `carnumber` varchar(50) DEFAULT NULL COMMENT '车牌号码',
+  `positionid` int(20) DEFAULT NULL COMMENT '车位id',
+  `times` int(10) DEFAULT NULL COMMENT '时长（单位：小时  不满1小时按1小时算）',
+  `price` double DEFAULT NULL COMMENT '价格',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of car_use_info
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `car_use_info_his`
+-- ----------------------------
+DROP TABLE IF EXISTS `car_use_info_his`;
+CREATE TABLE `car_use_info_his` (
+  `id` int(20) NOT NULL DEFAULT '0' COMMENT 'id',
+  `starttime` varchar(50) NOT NULL COMMENT '驶入时间',
+  `endtime` varchar(50) NOT NULL COMMENT '使出时间',
+  `carusername` varchar(50) DEFAULT NULL COMMENT '车主',
+  `carnumber` varchar(50) NOT NULL COMMENT '车牌号码',
+  `positionid` int(20) NOT NULL COMMENT '车位id',
+  `times` int(10) DEFAULT NULL COMMENT '时长（单位：小时  不满1小时按1小时算）',
+  `price` double DEFAULT NULL COMMENT '价格',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of car_use_info_his
+-- ----------------------------
+INSERT INTO `car_use_info_his` VALUES ('4', '2017-05-15 18:50:47', '2017-05-15 18:55:22', '张三', '发生的', '18', null, null);
+INSERT INTO `car_use_info_his` VALUES ('5', '2017-05-15 18:55:03', '2017-05-15 18:55:16', '232', '23', '17', null, null);
+INSERT INTO `car_use_info_his` VALUES ('6', '2017-05-15 18:55:31', '2017-05-15 19:06:42', '233232', '222', '18', null, null);
+INSERT INTO `car_use_info_his` VALUES ('7', '2017-05-15 19:06:55', '2017-05-15 19:07:00', '332', '覆盖', '18', null, null);
+INSERT INTO `car_use_info_his` VALUES ('8', '2017-05-15 19:25:53', '2017-05-15 19:26:00', '33', '233', '18', '1', null);
+INSERT INTO `car_use_info_his` VALUES ('9', '2017-05-15 19:41:15', '2017-05-15 20:06:14', '资方', '防守对方', '18', '825', '825');
+INSERT INTO `car_use_info_his` VALUES ('10', '2017-05-15 20:08:23', '2017-05-15 20:08:30', '221', '3问32', '17', '3', '1500');
+INSERT INTO `car_use_info_his` VALUES ('11', '2017-05-15 20:09:45', '2017-05-15 20:10:31', '防守对方', '发大水', '17', '1', '500');
+INSERT INTO `car_use_info_his` VALUES ('12', '2017-05-15 20:13:32', '2017-05-15 20:13:36', '发大水', '发大水', '15', '1', '500');
 
 -- ----------------------------
 -- Table structure for `cheweixinxi`
@@ -123,12 +172,14 @@ CREATE TABLE `cheweixinxi` (
   `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `guige` int(5) DEFAULT NULL COMMENT '规格',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cheweixinxi
 -- ----------------------------
-INSERT INTO `cheweixinxi` VALUES ('15', '555', '1', null, '空闲', '感豆腐干反对', '2017-05-14 19:32:43', '1');
+INSERT INTO `cheweixinxi` VALUES ('15', '555', '1', null, '空闲', '感豆腐干反对', '2017-05-15 20:13:36', '1');
+INSERT INTO `cheweixinxi` VALUES ('17', '123', '4', null, '空闲', '3速度', '2017-05-15 20:10:31', '4');
+INSERT INTO `cheweixinxi` VALUES ('18', '45333', '6', null, '空闲', '发送', '2017-05-15 20:06:14', '1');
 
 -- ----------------------------
 -- Table structure for `dx`
