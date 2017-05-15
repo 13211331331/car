@@ -13,6 +13,8 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
+<%@ page import="java.text.DateFormat" %>
+<%@ page import="java.text.ParseException" %>
 <jsp:useBean id="connDbBean" scope="page" class="db.db"/>
 <html>
   <head>
@@ -76,8 +78,10 @@
 
         ResultSet rs = connDbBean.executeQuery(sql1);
         boolean flag = false;
+        String starttime = "";
         while(rs.next()){
             flag = true;
+            starttime = rs.getString("starttime");
         }
 
       //  String starttime = request.getParameter("starttime");
@@ -90,8 +94,51 @@
             String sql2 = "update cheweixinxi t set t.zhuangtai='空闲' where id="+id;
             connDbBean.executeUpdate(sql2);
 
-              String sql21 = "update car_use_info t set t.endtime='"+dateNow+"'  where t.positionid="+id;
+
+             DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+             long times = 0;
+
+                    Date one;
+                    Date two;
+                    long day = 0;
+                    long hour = 0;
+                    long min = 0;
+                    long sec = 0;
+                    try {
+                        one = df.parse(starttime);
+                        two = new Date();
+                        long time1 = one.getTime();
+                        long time2 = two.getTime();
+                        long diff ;
+                        if(time1<time2) {
+                            diff = time2 - time1;
+                        } else {
+                            diff = time1 - time2;
+                        }
+                        day = diff / (24 * 60 * 60 * 1000);
+                        hour = (diff / (60 * 60 * 1000) - day * 24);
+                        min = ((diff / (60 * 1000)) - day * 24 * 60 - hour * 60);
+                         sec = (diff/1000-day*24*60*60-hour*60*60-min*60);
+                         if(sec > 0){
+                         min = min +1;
+                         }
+                        times = day *24 + hour;
+                        if(min > 0){
+                         times = times+1;
+                        }
+
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+
+
+              String sql21 = "update car_use_info t set t.endtime='"+dateNow+"' ,t.times="+times+" where t.positionid="+id;
               connDbBean.executeUpdate(sql21);
+
+
+
 
             String sql3 = "insert into car_use_info_his select * from car_use_info t where t.positionid="+id;
             String sql4 = "delete from car_use_info  where positionid="+id;
