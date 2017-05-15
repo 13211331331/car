@@ -88,7 +88,7 @@ body, h1,button,input,select,textarea,  fieldset,td{ font:12px/1.5 microsoft yah
 				<ul id="submenu4">
                     <li><a href="carPositionPriceSetting.jsp" target="frmright">车位价格设置</a></li>
 					<li><a href="cheweixinxi_add.jsp" target="frmright">车位添加</a></li>
-					<li><a href="cheweixinxi_list.jsp" target="frmright">车位查询</a></li>
+				<%--	<li><a href="cheweixinxi_list.jsp" target="frmright">车位查询</a></li>--%>
 
                     <li><a href="carPositionInfo.jsp" target="frmright">临时车位信息</a></li>
                     <li><a href="carPositionTongji.jsp" target="frmright">统计</a></li>
