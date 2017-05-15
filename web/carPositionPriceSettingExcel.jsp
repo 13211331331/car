@@ -1,11 +1,13 @@
 
-<%@ page language="java"  pageEncoding="UTF-8"%>
+<%@ page language="java"  pageEncoding="GB2312"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-
-
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    response.setContentType("application/vnd.ms-excel");
+    response.addHeader("Content-Disposition", "attachment;filename=carPositionPriceSetting.xls");
 %>
+
+
 <%@ page language="java" import="java.sql.*" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Map" %>
@@ -16,7 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>è½¦ä½ä¿¡æ¯</title>
+    <title>³µÎ»ĞÅÏ¢</title>
 	<link rel="stylesheet" href="kindeditor_a5/themes/default/default.css" />
 	<link rel="stylesheet" href="kindeditor_a5/plugins/code/prettify.css" />
 	<script charset="utf-8" src="kindeditor_a5/kindeditor.js"></script>
@@ -52,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    {
 	        var pop=new Popup({ contentType:1,isReloadOnClose:false,width:320,height:50});
             pop.setContent("contentUrl","upload.jsp?Result="+tt);
-            pop.setContent("title","æ–‡ä»¶ä¸Šä¼ ");
+            pop.setContent("title","ÎÄ¼şÉÏ´«");
             pop.build();
             pop.show();
 	    }
@@ -61,8 +63,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script language="javascript">
 function check()
 {
-	if(document.form1.cheweibianhao.value==""){alert("è¯·è¾“å…¥è½¦ä½ç¼–å·");document.form1.cheweibianhao.focus();return false;}
-if(document.form1.weizhi.value==""){alert("è¯·è¾“å…¥ä½ç½®");document.form1.weizhi.focus();return false;}
+	if(document.form1.cheweibianhao.value==""){alert("ÇëÊäÈë³µÎ»±àºÅ");document.form1.cheweibianhao.focus();return false;}
+if(document.form1.weizhi.value==""){alert("ÇëÊäÈëÎ»ÖÃ");document.form1.weizhi.focus();return false;}
 
 }
 function gow()
@@ -95,10 +97,10 @@ function gow()
 
    %>
   <form name="form1" id="form1" method="post" action="cheweixinxi_add_post.jsp">
-  è½¦ä½ä»·æ ¼è®¾ç½®ï¼ˆå•ä½ï¼šå…ƒ/æœˆï¼‰:
+  ³µÎ»¼Û¸ñÉèÖÃ£¨µ¥Î»£ºÔª/ÔÂ£©:
   <br><br>
 
-      <input type="button" name="Submit2" value="å¯¼å‡ºEXCEL" style='border:solid 1px #000000; color:#666666' onClick="javascript:location.href='carPositionPriceSettingExcel.jsp';" />
+      <input type="button" name="Submit2" value="µ¼³öEXCEL" style='border:solid 1px #000000; color:#666666' onClick="javascript:location.href='carPositionPriceSettingExcel.jsp';" />
 
    <table width="100%" border="1" align="center" cellpadding="3" cellspacing="1" bordercolor="#00FFFF" style="border-collapse:collapse">
 
@@ -110,9 +112,9 @@ function gow()
         ss += "<td>"+rs2.getString("guige_desc")+"</td>";
         list.add(rs2.getString("guige"));
     }
-    ss += "<td>æ“ä½œ</td>";
+   // ss += "<td>²Ù×÷</td>";
 
-    out.print(" <tr><td>(è½¦ä½åŒºåŸŸ/è½¦ä½è§„æ ¼)</td>"+ss+"</tr>");
+    out.print(" <tr><td>(³µÎ»ÇøÓò/³µÎ»¹æ¸ñ)</td>"+ss+"</tr>");
 
     int  j = 1;
    while(rs1.next()){
@@ -122,7 +124,7 @@ function gow()
        for(String str1:list){
            bb += ("<td>"+map.get(rs1.getString("weizhi")+"-" +str1)+"</td>");
        }
-       bb +="<td><a href='modifyPrice.jsp?id="+ rs1.getString("weizhi")+"'>ä¿®æ”¹</a></td>";
+       //bb +="<td><a href='modifyPrice.jsp?id="+ rs1.getString("weizhi")+"'>ĞŞ¸Ä</a></td>";
        out.print(" <tr><td>"+ rs1.getString("weizhi_desc")+"</td>"+bb+"</tr>");
 
        j++;

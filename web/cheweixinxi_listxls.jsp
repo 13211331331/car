@@ -1,5 +1,5 @@
 
-<%@ page language="java"  pageEncoding="UTF-8"%>
+<%@ page language="java"  pageEncoding="GB2312"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -12,7 +12,7 @@ response.addHeader("Content-Disposition", "attachment;filename=cheweixinxi.xls")
   <head>
     <base href="<%=basePath%>">
     
-    <title>Ф╗║Е²≈Е░█Г╖╟</title>
+    <title>дё©ИцШЁф</title>
     
 
   </head>
@@ -21,19 +21,19 @@ String sql;
 ResultSet RS_result;
 %>
   <body >
-  <p>Е╥╡Ф°┴Ф╗║Е²≈Е░█Г╖╟Е┬≈Х║╗О╪ </p>
+  <p>ряспдё©ИцШЁфап╠Мё╨</p>
   
 
 <table width="100%" border="1" align="center" cellpadding="3" cellspacing="1" bordercolor="00FFFF" style="border-collapse:collapse">  
   <tr>
-    <td width="30" align="center" bgcolor="CCFFFF">Е╨▐Е▐╥</td>
-    <td bgcolor='#CCFFFF'>Х╫╕Д╫█Г╪√Е▐╥</td>
-    <td bgcolor='#CCFFFF'>Д╫█Г╫╝</td>
-    <td bgcolor='#CCFFFF'>Х╫╕Д╦╩</td>
-    <td bgcolor='#CCFFFF'>Г┼╤Ф─│</td>
-    <td bgcolor='#CCFFFF'>Е╓┤ФЁ╗</td>
+    <td width="30" align="center" bgcolor="CCFFFF">пР╨е</td>
+    <td bgcolor='#CCFFFF'>Ё╣н╩╠Ю╨е</td>
+    <td bgcolor='#CCFFFF'>н╩жц</td>
+    <td bgcolor='#CCFFFF'>Ё╣жВ</td>
+    <td bgcolor='#CCFFFF'>в╢л╛</td>
+    <td bgcolor='#CCFFFF'>╠╦в╒</td>
     
-    <td width="138" align="center" bgcolor="CCFFFF">Ф╥╩Е┼═Ф≈╤И≈╢</td>
+    <td width="138" align="center" bgcolor="CCFFFF">лМ╪сй╠╪Д</td>
     
 
   </tr>
@@ -80,7 +80,7 @@ beizhu=RS_result.getString("beizhu");
 </table>
 
 <br>
-Д╩╔Д╦┼Ф∙╟Ф█╝Е┘╠<%=i %>Ф²║
+ртиойЩ╬щ╧╡<%=i %>лУ
   </body>
 </html>
 
