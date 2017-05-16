@@ -92,7 +92,7 @@ body, h1,button,input,select,textarea,  fieldset,td{ font:12px/1.5 microsoft yah
 
                     <li><a href="carPositionInfo.jsp" target="frmright">临时车位信息</a></li>
                     <li><a href="carPositionTongji.jsp" target="frmright">统计</a></li>
-                    <li><a href="carPositionApply.jsp" target="frmright">车位申请审核</a></li>
+                    <li><a href="carPositionApplyAudit.jsp" target="frmright">车位申请审核</a></li>
                     <li><a href="carPositionUseInfo.jsp" target="frmright">车位使用记录</a></li>
 
 				</ul>
