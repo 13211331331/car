@@ -62,7 +62,6 @@ body, h1,button,input,select,textarea,  fieldset,td{ font:12px/1.5 microsoft yah
 <body style="margin: 0; border: 0;">
 
 
-
         <div class="main" id="menua">
 		
 			<h3 menuid="1"  id="menu1" onclick="showsubmenu(1)" toggleGroup="on" class="menutitle"><div class="bt1"><span>前台信息管理</span></div></h3>
