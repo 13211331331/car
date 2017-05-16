@@ -115,7 +115,7 @@ function gow()
 
     <tr>
       <td>&nbsp;</td>
-      <td><input type="submit" name="Submit" value="提交" onClick="return check();" style='border:solid 1px #000000; color:#666666' />
+      <td><input type="submit" name="Submit" value="提交" style='border:solid 1px #000000; color:#666666' />
       </td>
     </tr>
   </table>
