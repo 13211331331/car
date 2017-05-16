@@ -75,6 +75,7 @@ body, h1,button,input,select,textarea,  fieldset,td{ font:12px/1.5 microsoft yah
 				<ul id="submenu2">
 					<li><a href="baoxiujilu_add.jsp" target="frmright">报修申请</a></li>
 					<li><a href="baoxiujilu_list2.jsp" target="frmright">申报记录查询</a></li>
+                    <li><a href="carPositionApply.jsp" target="frmright">申请车位</a></li>
 				</ul>
 			
 			<h3 menuid="3"  id="menu3" onclick="showsubmenu(3)" toggleGroup="on" class="menutitle"><div class="bt3"><span>缴费查看</span></div></h3>
