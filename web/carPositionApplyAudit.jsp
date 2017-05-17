@@ -114,6 +114,7 @@ zhuangtai=RS_result.getString("zhuangtai");
 remark=RS_result.getString("remark");
      weizhi_desc=RS_result.getString("weizhi_desc");
 
+ starttime=RS_result.getString("starttime");
  createtime=RS_result.getString("createtime");
  int status =RS_result.getInt("status");
      if(status == 0){
