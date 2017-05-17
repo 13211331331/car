@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2017-05-15 20:16:15
+Date: 2017-05-17 09:05:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -108,6 +108,27 @@ INSERT INTO `car_positon_price` VALUES ('21', '4', '3', '5', '3米以上', '地�
 INSERT INTO `car_positon_price` VALUES ('22', '4', '4', '500', '3米以上', '后巷');
 INSERT INTO `car_positon_price` VALUES ('23', '4', '5', '500', '3米以上', '草坪');
 INSERT INTO `car_positon_price` VALUES ('24', '4', '6', '5', '3米以上', '路边停车位');
+
+-- ----------------------------
+-- Table structure for `car_postion_apply`
+-- ----------------------------
+DROP TABLE IF EXISTS `car_postion_apply`;
+CREATE TABLE `car_postion_apply` (
+  `id` int(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `positionid` int(20) DEFAULT NULL COMMENT '车位id',
+  `carusername` varchar(50) DEFAULT NULL COMMENT '车主姓名',
+  `carnumber` varchar(50) DEFAULT NULL COMMENT '车票号码',
+  `starttime` varchar(40) DEFAULT NULL COMMENT '驶入时间',
+  `createtime` varchar(40) DEFAULT NULL COMMENT '创建时间',
+  `status` int(4) DEFAULT '0' COMMENT '状态  0 未审核  1审核通过  2审核失败',
+  `remark` varchar(400) DEFAULT NULL COMMENT '审核备注',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of car_postion_apply
+-- ----------------------------
+INSERT INTO `car_postion_apply` VALUES ('2', '18', '张三', '里的', '2017-05-17 13:33:36', '2017-05-16 13:33:51', '0', null);
 
 -- ----------------------------
 -- Table structure for `car_use_info`
